@@ -2,6 +2,8 @@
 Django AlphaFilter
 ==================
 
+Adapted for Django Suit Admin
+
 Django AlphaFilter was designed to work like Django's default ``date_hierarchy`` admin filter. It puts an clickable alphabet in the same location as the date hierarchy - at the top of the results list.
 
 **Changes in 0.7:**
