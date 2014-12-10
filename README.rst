@@ -115,4 +115,4 @@ Example
 
 **Adapted for Django Suit Admin**
 
-![screenshot 2014-12-10 23 36 52](https://cloud.githubusercontent.com/assets/3192203/5383874/f733a968-80c5-11e4-8c26-2ed2d3627c93.png)
+Example screenshot https://cloud.githubusercontent.com/assets/3192203/5383874/f733a968-80c5-11e4-8c26-2ed2d3627c93.png
