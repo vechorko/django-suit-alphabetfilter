@@ -2,8 +2,6 @@
 Django AlphaFilter
 ==================
 
-Adapted for Django Suit Admin
-
 Django AlphaFilter was designed to work like Django's default ``date_hierarchy`` admin filter. It puts an clickable alphabet in the same location as the date hierarchy - at the top of the results list.
 
 **Changes in 0.7:**
@@ -111,3 +109,10 @@ The change_list.html document should only contain one line::
 	{% extends "alphafilter/change_list.html" %}
 
 .. note:: You **cannot** place this template in the ``admin`` directory, as it leads to an infinite loop of inheritance.
+
+Example
+=========
+
+**Adapted for Django Suit Admin**
+
+![screenshot 2014-12-10 23 36 52](https://cloud.githubusercontent.com/assets/3192203/5383874/f733a968-80c5-11e4-8c26-2ed2d3627c93.png)
