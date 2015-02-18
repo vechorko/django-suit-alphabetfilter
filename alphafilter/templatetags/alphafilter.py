@@ -9,6 +9,9 @@ from alphafilter.sql import FirstLetter
 
 register = Library()
 
+from django.conf import settings
+ALPHABET_FILTER_BY_FIELD = getattr(settings, 'ALPHABET_FILTER_BY_FIELD', ('name', 'title'))
+
 
 def _get_default_letters(model_admin=None):
     """
@@ -42,20 +45,22 @@ def _get_available_letters(field_name, queryset):
 
     Returns a set that represents the letters that exist in the database.
     """
+    def upper_first_letter(element):
+        object_fields = [field.attname for field in element._meta.fields]
+        for field in ALPHABET_FILTER_BY_FIELD:
+            if field in object_fields:
+                word = getattr(element, field)
+                return word[0].upper()
+
     if django.VERSION[1] <= 4:
         result = queryset.values(field_name).annotate(
             fl=FirstLetter(field_name)
         ).values('fl').distinct()
         return set([res['fl'] for res in result if res['fl'] is not None])
     else:
-        from django.db import connection
-        qn = connection.ops.quote_name
-        db_table = queryset.model._meta.db_table
-        sql = "SELECT DISTINCT UPPER(SUBSTR(%s, 1, 1)) as letter FROM %s" % (qn(field_name), qn(db_table))
-        cursor = connection.cursor()
-        cursor.execute(sql)
-        rows = cursor.fetchall() or ()
-        return set([row[0] for row in rows if row[0] is not None])
+        return set([upper_first_letter(row)
+                   for row in queryset
+                   if row is not None])
 
 
 def alphabet(cl):
